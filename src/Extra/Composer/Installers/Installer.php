@@ -31,7 +31,7 @@ class Installer extends LibraryInstaller
                 'Sorry the package type of this package is not yet supported.'
             );
         }
-        $class = 'Composer\\Installers\\' . $this->supportedTypes[$installerType];
+        $class = 'Extra\\Composer\\Installers\\' . $this->supportedTypes[$installerType];
         $installer = new $class($package, $this->composer, $this->getIO());
         return $installer->getInstallPath($package, $installerType);
     }
@@ -65,11 +65,15 @@ class Installer extends LibraryInstaller
      */
     protected function findInstallerByType($type)
     {
-        if(array_key_exists($type, $this->supportedTypes)) {
-            return $type;
+        $installerType = false;
+        krsort($this->supportedTypes);
+        foreach ($this->supportedTypes as $key => $val) {
+            if ($key === substr($type, 0, strlen($key))) {
+                $installerType = substr($type, 0, strlen($key));
+                break;
+            }
         }
-
-        return false;
+        return $installerType;
     }
     /**
      * Get the second part of the regular expression to check for support of a
@@ -82,7 +86,7 @@ class Installer extends LibraryInstaller
     {
         $pattern = false;
         if (!empty($this->supportedTypes[$frameworkType])) {
-            $frameworkClass = 'Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
+            $frameworkClass = 'Extra\\Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
             /** @var BaseInstaller $framework */
             $framework = new $frameworkClass(null, $this->composer, $this->getIO());
             $locations = array_keys($framework->getLocations());
