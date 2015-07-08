@@ -16,6 +16,7 @@ class Installer extends LibraryInstaller
      */
     private $supportedTypes = array(
         'site'       => 'SiteInstaller',
+        'drupal'       => 'DrupalInstaller',
     );
 
     /**
