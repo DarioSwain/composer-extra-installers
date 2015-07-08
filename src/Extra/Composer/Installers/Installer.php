@@ -46,6 +46,30 @@ class Installer extends LibraryInstaller
         $this->io->write(sprintf('Deleting %s - %s', $installPath, $this->filesystem->removeDirectory($installPath) ? '<comment>deleted</comment>' : '<error>not deleted</error>'));
     }
 
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package) {
+
+        parent::install($repo, $package);
+
+        if ($package->getType() === 'drupal-core') {
+            $extra = $this->composer->getPackage()->getExtra();
+            if (!empty($extra['symlink'])) {
+                $linkPath = realpath($extra['symlink']['to']);
+                $targetPath = realpath($extra['symlink']['from']);
+
+                if (substr($linkPath, -1) !== '/') {
+                    $linkPath .= '/';
+                }
+                $linkPath .= $extra['symlink']['from'];
+
+                if (is_link($linkPath)) {
+                    unlink($linkPath);
+                }
+
+                symlink($targetPath, $linkPath);
+            }
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
