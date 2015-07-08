@@ -8,6 +8,9 @@
   "extra": {
     "class": "Extra\\Composer\\InstallerPlugin"
   },
+  "require": {
+    "composer-plugin-api": "1.0.0"
+  },
   "require-dev": {
     "composer/composer": "1.0.*@dev"
   }
