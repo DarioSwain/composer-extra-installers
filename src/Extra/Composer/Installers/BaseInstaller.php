@@ -20,9 +20,6 @@ abstract class BaseInstaller
      */
     public function __construct(PackageInterface $package = null, Composer $composer = null, IOInterface $io = null)
     {
-        if ($io !== null) {
-            $this->io->write($package->getName().' '. $package->getVersion());
-        }
         $this->composer = $composer;
         $this->package = $package;
         $this->io = $io;
