@@ -1,5 +1,5 @@
 <?php
-namespace Composer\Installers;
+namespace Extra\Composer\Installers;
 
 class DrupalInstaller extends BaseInstaller
 {

@@ -1,12 +1,12 @@
 {
   "name": "darioswain/composer-extra-installers",
-  "type": "composer-installer",
+  "type": "composer-plugin",
   "description": "Composer library installer",
   "autoload": {
-    "psr-0": { "Composer\\Installers\\": "src/" }
+    "psr-0": { "Extra\\Composer\\": "src/" }
   },
   "extra": {
-    "class": "Composer\\Installers\\Installer"
+    "class": "Extra\\Composer\\InstallerPlugin"
   },
   "require-dev": {
     "composer/composer": "1.0.*@dev"

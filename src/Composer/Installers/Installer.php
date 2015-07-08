@@ -1,6 +1,6 @@
 <?php
 
-namespace Composer\Installers;
+namespace Extra\Composer\Installers;
 
 use Composer\IO\IOInterface;
 use Composer\Installer\LibraryInstaller;
